@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /novo.html
+Disallow: /index.v
+
+Sitemap: https://therly.com.au/sitemap.xml
