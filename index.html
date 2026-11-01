@@ -1143,8 +1143,12 @@ h2{font-size:clamp(34px,4.6vw,68px);line-height:1.02;letter-spacing:-.032em;font
         <p class="lead">Based on the Sunshine Coast, serving Noosa and businesses across Australia. Ask for a free website preview, or tell us about your CRM or app project.</p>
       </div>
       <div class="contact-details rv"><a href="mailto:hello@therly.com.au">hello@therly.com.au</a><a href="tel:+61449938730">0449 938 730</a></div>
-      <form class="contact-form rv" novalidate>
-        <p class="form-note full">This form opens a draft in your email app. Review it and press Send there to contact us. You can also email or call us directly.</p>
+      <form class="contact-form rv" action="https://formsubmit.co/hello@therly.com.au" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New project enquiry — Therly Studio">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://therly.com.au/thanks/">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" hidden>
+        <p class="form-note full">Send your project enquiry to Therly Studio. FormSubmit securely processes the form and may ask you to complete a spam check. You can also email or call us directly.</p>
         <label>Name<input name="name" id="contact-name" autocomplete="name" maxlength="120" required aria-describedby="name-error"><span class="field-error" id="name-error" hidden></span></label>
         <label>Email<input name="email" id="contact-email" type="email" autocomplete="email" maxlength="254" required aria-describedby="email-error"><span class="field-error" id="email-error" hidden></span></label>
         <label class="full">Business<input name="business" autocomplete="organization" maxlength="160"></label>
@@ -1156,7 +1160,7 @@ h2{font-size:clamp(34px,4.6vw,68px);line-height:1.02;letter-spacing:-.032em;font
           <label class="pick"><input type="checkbox" name="need" value="Not sure yet"><span>Not sure yet</span></label>
         </fieldset>
         <label class="full">Tell us about your project<textarea name="message" rows="4" maxlength="5000"></textarea></label>
-        <button class="submit full" type="submit">Open email draft <span aria-hidden="true">→</span></button>
+        <button class="submit full" type="submit">Send enquiry <span aria-hidden="true">→</span></button>
         <p class="form-note full">We use your details to respond to your enquiry. <a href="/privacy/">Privacy policy</a>.</p>
         <p class="form-status full" role="status" aria-live="polite"></p>
       </form>

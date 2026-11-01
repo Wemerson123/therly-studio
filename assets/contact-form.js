@@ -14,15 +14,22 @@
   fields.forEach(input => input.addEventListener('input', () => {
     if (input.getAttribute('aria-invalid') === 'true') validate(input);
   }));
+  let pending = false;
+  const submit = form.querySelector('[type=submit]');
   form.addEventListener('submit', event => {
-    event.preventDefault();
+    if (pending) { event.preventDefault(); return; }
     const valid = fields.map(validate);
-    if (valid.some(value => !value)) { fields[valid.indexOf(false)].focus(); return; }
-    const d = new FormData(form);
-    const body = `Name: ${d.get('name').trim()}\nEmail: ${d.get('email').trim()}\nBusiness: ${d.get('business') || '-'}\nInterested in: ${d.getAll('need').join(', ') || '-'}\n\n${d.get('message') || ''}`;
-    const url = `mailto:hello@therly.com.au?subject=${encodeURIComponent('New project enquiry')}&body=${encodeURIComponent(body)}`;
-    form.querySelector('.form-status').textContent = 'Your email draft is ready. Press Send in your email app to send your enquiry. If no app opens, email hello@therly.com.au or call 0449 938 730.';
-    window.therlyTrackContact?.('email_draft');
-    window.location.href = url;
+    if (valid.some(value => !value)) {
+      event.preventDefault(); fields[valid.indexOf(false)].focus(); return;
+    }
+    pending = true;
+    submit.disabled = true;
+    form.querySelector('.form-status').textContent = 'Opening the secure submission page. Complete any spam check to send your enquiry.';
+    // This is an attempt, not a confirmed delivery or a Lead.
+    window.therlyTrackContact?.('form_attempt');
+  });
+  window.addEventListener('pageshow', () => {
+    pending = false; submit.disabled = false;
+    form.querySelector('.form-status').textContent = '';
   });
 })();
