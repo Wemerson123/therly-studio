@@ -80,7 +80,7 @@
   window.therlyTrackContact = method => {
     if (choice !== 'accepted' || !loaded) return;
     window.gtag('event','contact_intent',{contact_method:method,page_location:location.origin + location.pathname});
-    if (metaLoaded) window.fbq('track', method === 'email_draft' ? 'Lead' : 'Contact', {method});
+    if (metaLoaded) window.fbq('track', 'Contact', {method});
   };
   document.addEventListener('click', event => {
     const link = event.target.closest('a[href]');
