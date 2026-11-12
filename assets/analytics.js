@@ -82,6 +82,14 @@
     window.gtag('event','contact_intent',{contact_method:method,page_location:location.origin + location.pathname});
     if (metaLoaded) window.fbq('track', 'Contact', {method});
   };
+  // Quote-page funnel: quote_form_start, quote_submit_click, generate_lead, quote_submit_error.
+  window.therlyTrack = (name, params = {}) => {
+    if (choice !== 'accepted' || !loaded) return;
+    window.gtag('event', name, {...params, page_location: location.origin + location.pathname});
+    if (!metaLoaded) return;
+    if (name === 'generate_lead') window.fbq('track', 'Lead', params);
+    else window.fbq('trackCustom', name, params);
+  };
   document.addEventListener('click', event => {
     const link = event.target.closest('a[href]');
     if (!link) return;
